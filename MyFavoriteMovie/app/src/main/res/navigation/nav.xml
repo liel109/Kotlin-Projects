@@ -7,20 +7,41 @@
 
     <fragment
         android:id="@+id/mainPageFragment"
-        android:name="com.example.myfavoritemovie.MainPageFragment"
+        android:name="com.example.myfavoritemovie.ui.allitems.MainPageFragment"
         android:label="main_page_fragment"
         tools:layout="@layout/main_page_fragment" >
         <action
             android:id="@+id/action_mainPageFragment_to_addItemFragment"
-            app:destination="@id/addItemFragment" />
+            app:destination="@id/addItemFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_detailedItemFragment"
+            app:destination="@id/detailedItemFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/addItemFragment"
-        android:name="com.example.myfavoritemovie.AddItemFragment"
+        android:name="com.example.myfavoritemovie.ui.additem.AddItemFragment"
         android:label="add_item_page_fragment"
         tools:layout="@layout/add_item_page_fragment" >
         <action
             android:id="@+id/action_addItemFragment_to_mainPageFragment"
-            app:destination="@id/mainPageFragment" />
+            app:destination="@id/mainPageFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            app:popUpTo="@id/nav" />
     </fragment>
+    <fragment
+        android:id="@+id/detailedItemFragment"
+        android:name="com.example.myfavoritemovie.ui.detailitem.DetailedItemFragment"
+        android:label="detail_item_layout"
+        tools:layout="@layout/detail_item_layout" />
 </navigation>

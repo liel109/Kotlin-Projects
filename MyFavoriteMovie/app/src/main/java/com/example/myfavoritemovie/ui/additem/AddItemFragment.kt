@@ -46,8 +46,8 @@ class AddItemFragment : Fragment() {
         binding = AddItemPageFragmentBinding.inflate(inflater, container, false)
 
         binding.addButton.setOnClickListener {
-            if(numberOfStars == 0){
-                Toast.makeText(requireContext(),"Pick a raiting for the movie!", Toast.LENGTH_LONG).show()
+            if(numberOfStars == 0 || binding.movieTitle.text.toString().trim().isEmpty() || binding.movieLength.text.toString().trim().isEmpty()){
+                Toast.makeText(requireContext(),"Enter the rating title and length", Toast.LENGTH_LONG).show()
             }
             else {
                 val item = Item(

@@ -48,6 +48,7 @@ class ItemViewModel(application: Application) : AndroidViewModel(application) {
 //            repository.deleteAll()
 //        }
 //    }
+
     fun deleteAllItems(){
         repository.deleteAll()
     }

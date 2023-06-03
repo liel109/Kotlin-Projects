@@ -40,9 +40,9 @@ android {
 
 dependencies {
 
-    def room_version = "2.4.2"
+    def room_version = "2.5.1"
+    implementation ("androidx.room:room-ktx:$room_version")
     implementation "androidx.room:room-runtime:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
     def nav_version = "2.5.3"
@@ -51,6 +51,9 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     implementation 'com.github.bumptech.glide:glide:4.15.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

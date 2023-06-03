@@ -23,22 +23,33 @@ class ItemViewModel(application: Application) : AndroidViewModel(application) {
         _chosenItem.value = item
     }
 
+//    fun addItem(item: Item){
+//        viewModelScope.launch {
+//            repository.addItem(item)
+//        }
+//    }
+
     fun addItem(item: Item){
-        viewModelScope.launch {
-            repository.addItem(item)
-        }
+        repository.addItem(item)
     }
+
+//    fun deleteItem(item: Item){
+//        viewModelScope.launch {
+//            repository.deleteItem(item)
+//        }
+//    }
 
     fun deleteItem(item: Item){
-        viewModelScope.launch {
-            repository.deleteItem(item)
-        }
+        repository.deleteItem(item)
     }
 
+//    fun deleteAllItems(){
+//        viewModelScope.launch {
+//            repository.deleteAll()
+//        }
+//    }
     fun deleteAllItems(){
-        viewModelScope.launch {
-            repository.deleteAll()
-        }
+        repository.deleteAll()
     }
 
 

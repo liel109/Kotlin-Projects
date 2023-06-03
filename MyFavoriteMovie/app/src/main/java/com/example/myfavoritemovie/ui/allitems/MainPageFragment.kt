@@ -56,14 +56,14 @@ class MainPageFragment : Fragment() {
 
         binding.clearButton.setOnClickListener {
             val builder = AlertDialog.Builder(context)
-            builder.setTitle("Confirmation")
-            builder.setMessage("Are you sure you want to delete all?")
+            builder.setTitle(getString(R.string.confirmation))
+            builder.setMessage(getString(R.string.confirmation_dialog))
 
-            builder.setPositiveButton("Yes") { _, _ ->
+            builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
                 viewModel.deleteAllItems()
             }
 
-            builder.setNegativeButton("No") { _, _ ->
+            builder.setNegativeButton(getString(R.string.no)) { _, _ ->
 
             }
 

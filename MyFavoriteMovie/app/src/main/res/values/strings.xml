@@ -6,4 +6,8 @@
     <string name="rating">Rating:</string>
     <string name="movie_length">Movie Length</string>
     <string name="pick_image">Pick Image</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="confirmation_dialog">Are you sure you want to delete all the movies?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
 </resources>

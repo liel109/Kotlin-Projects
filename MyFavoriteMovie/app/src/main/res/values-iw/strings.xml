@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">הסרט האהוב עלי</string>
+    <string name="add_item_headline">הוסף סרט חדש</string>
+    <string name="movie_title">שם הסרט</string>
+    <string name="length">אורך:</string>
+    <string name="rating">דירוג:</string>
+    <string name="movie_length">אורך הסרט</string>
+    <string name="pick_image">בחר תמונה</string>
+</resources>

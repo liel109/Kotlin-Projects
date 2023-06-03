@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/movie_title"
-            android:hint="Movie Title"/>
+            android:hint="@string/movie_title"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/movie_length"
-            android:hint="Movie Length"/>
+            android:hint="@string/movie_length"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,7 +84,7 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:backgroundTint="@color/blue"
-        android:text="Pick Image"
+        android:text="@string/pick_image"
         android:id="@+id/pick_image_button"
         android:layout_weight="1"/>
 

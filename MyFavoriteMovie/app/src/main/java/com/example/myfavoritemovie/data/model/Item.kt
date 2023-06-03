@@ -20,14 +20,4 @@ data class Item(
 }
 
 
-//object ItemManger{
-//    val items : MutableList<Item> = mutableListOf()
-//
-//    fun add (item:Item){
-//        items.add(item)
-//    }
-//
-//    fun remove(index:Int){
-//        items.removeAt(index)
-//    }
-//}
+

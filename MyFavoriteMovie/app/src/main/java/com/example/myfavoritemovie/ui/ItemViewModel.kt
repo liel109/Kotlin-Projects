@@ -4,8 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.myfavoritemovie.data.model.Item
 import com.example.myfavoritemovie.data.repositary.ItemRepository
+import kotlinx.coroutines.launch
 
 class ItemViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -22,15 +24,21 @@ class ItemViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun addItem(item: Item){
-        repository.addItem(item)
+        viewModelScope.launch {
+            repository.addItem(item)
+        }
     }
 
     fun deleteItem(item: Item){
-        repository.deleteItem(item)
+        viewModelScope.launch {
+            repository.deleteItem(item)
+        }
     }
 
     fun deleteAllItems(){
-        repository.deleteAll()
+        viewModelScope.launch {
+            repository.deleteAll()
+        }
     }
 
 

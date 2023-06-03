@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">My Favorite Movie</string>
     <string name="add_item_headline">Add A New Movie</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="length">Length:</string>
+    <string name="rating">Rating:</string>
+    <string name="movie_length">Movie Length</string>
+    <string name="pick_image">Pick Image</string>
 </resources>

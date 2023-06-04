@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.additem.AddItemFragment"
+    tools:context=".ui.AddItemFragment"
     android:orientation="vertical"
     android:layout_marginHorizontal="7dp">
 

@@ -15,7 +15,7 @@ class ItemAdapter(val items: List<Item>, private val callback: ItemListener) : R
         fun onItemLongClicked(index:Int)
     }
 
-    inner class ItemViewHolder(private val binding:ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root),
+    inner class ItemViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root),
     View.OnClickListener, View.OnLongClickListener{
 
         init {

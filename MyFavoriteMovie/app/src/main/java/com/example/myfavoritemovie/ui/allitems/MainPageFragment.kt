@@ -12,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myfavoritemovie.ui.ItemViewModel
 import com.example.myfavoritemovie.R
+import com.example.myfavoritemovie.ui.ItemViewModel
 import com.example.myfavoritemovie.data.utils.autoCleared
 import com.example.myfavoritemovie.databinding.MainPageFragmentBinding
 

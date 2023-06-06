@@ -13,9 +13,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.myfavoritemovie.R
 import com.example.myfavoritemovie.data.model.Item
 import com.example.myfavoritemovie.ui.ItemViewModel
-import com.example.myfavoritemovie.R
 import com.example.myfavoritemovie.data.utils.autoCleared
 import com.example.myfavoritemovie.databinding.AddItemPageFragmentBinding
 
@@ -29,13 +29,15 @@ class AddItemFragment : Fragment() {
 
     private val viewModel : ItemViewModel by activityViewModels()
 
-
     val pickItemLauncher : ActivityResultLauncher<Array<String>> =
-        registerForActivityResult(ActivityResultContracts.OpenDocument()){
-            binding.pickImage.setImageURI(it)
-            requireActivity().contentResolver.takePersistableUriPermission(it!!, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            imageUri = it
+    registerForActivityResult(ActivityResultContracts.OpenDocument()){
+        uri: Uri? ->
+        if(uri != null){
+            binding.pickImage.setImageURI(uri)
+            requireActivity().contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            imageUri = uri
         }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

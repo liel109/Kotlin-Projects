@@ -10,4 +10,5 @@
     <string name="confirmation_dialog">Are you sure you want to delete all the movies?</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+    <string name="add_item">add item</string>
 </resources>

@@ -3,6 +3,7 @@
     <string name="app_name">הסרט האהוב עלי</string>
     <string name="add_item_headline">הוסף סרט חדש</string>
     <string name="movie_title">שם הסרט</string>
+    <string name="movie_description">תקציר:</string>
     <string name="length">אורך:</string>
     <string name="rating">דירוג:</string>
     <string name="movie_length">אורך הסרט</string>
@@ -12,4 +13,15 @@
     <string name="yes">כן</string>
     <string name="no">לא</string>
     <string name="add_item">הוסף פריט</string>
+    <string name="trash_can_description">מחק את כל הפריטים</string>
+    <string name="movie_poster">פוסטר לסרט</string>
+    <string name="length_hours">ש</string>
+    <string name="length_minutes">ד</string>
+    <string name="rate_star_description">דירוג</string>
+    <string name="select_image_preview">תצוגה מקדימה לתמונה שנבחרה</string>
+    <string name="seperator">|</string>
+    <string name="stars_example">★★★★★</string>
+    <string name="movie_length_example">123ד</string>
+    <string name="movie_description_example">תקציר לסרט שנמשך לאורך כמה שורות</string>
+    <string name="movie_description_detail_layout">תקציר:</string>
 </resources>

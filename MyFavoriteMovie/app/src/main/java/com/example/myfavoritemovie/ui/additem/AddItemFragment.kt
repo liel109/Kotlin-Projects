@@ -1,5 +1,7 @@
 package com.example.myfavoritemovie.ui.additem
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -20,6 +22,8 @@ import com.example.myfavoritemovie.data.utils.autoCleared
 import com.example.myfavoritemovie.databinding.AddItemPageFragmentBinding
 
 class AddItemFragment : Fragment() {
+
+    private val ANIMATION_DURATION = 75L
 
     private var binding : AddItemPageFragmentBinding by autoCleared()
 
@@ -47,14 +51,20 @@ class AddItemFragment : Fragment() {
 
         binding = AddItemPageFragmentBinding.inflate(inflater, container, false)
 
+        binding.movieLengthHours.minValue = 0
+        binding.movieLengthHours.maxValue = 20
+        binding.movieLengthMinutes.minValue = 0
+        binding.movieLengthMinutes.maxValue = 60
+
         binding.addButton.setOnClickListener {
-            if(numberOfStars == 0 || binding.movieTitle.text.toString().trim().isEmpty() || binding.movieLength.text.toString().trim().isEmpty()){
+            if(numberOfStars == 0 || binding.movieTitle.text.toString().trim().isEmpty()){
                 Toast.makeText(requireContext(),"Enter the rating title and length", Toast.LENGTH_LONG).show()
             }
             else {
                 val item = Item(
                     binding.movieTitle.text.toString(),
-                    binding.movieLength.text.toString(),
+                    binding.movieDesc.text.toString(),
+                    binding.movieLengthHours.value * 60 + binding.movieLengthMinutes.value,
                     imageUri.toString(),
                     numberOfStars
                 )
@@ -121,6 +131,18 @@ class AddItemFragment : Fragment() {
     private fun changeStar(star: ImageView, full : Boolean){
         if(full){
             star.setImageResource(R.drawable.ic_full_star)
+
+            val scaleX = ObjectAnimator.ofFloat(star,"scaleX",1f, 1.2f).setDuration(ANIMATION_DURATION)
+            val scaleY = ObjectAnimator.ofFloat(star,"scaleY",1f,1.2f).setDuration(ANIMATION_DURATION)
+            scaleX.repeatCount = 1
+            scaleX.repeatMode = ObjectAnimator.REVERSE
+            scaleY.repeatCount = 1
+            scaleY.repeatMode = ObjectAnimator.REVERSE
+
+            val animatorSet = AnimatorSet()
+            animatorSet.playTogether(scaleX,scaleY)
+            animatorSet.start()
+
         }
         else{
             star.setImageResource(R.drawable.ic_empty_star)

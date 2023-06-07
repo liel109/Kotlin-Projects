@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_above="@+id/page_buttom"
+        android:layout_above="@+id/page_bottom"
         android:background="@color/white">
 
         <RelativeLayout
@@ -36,13 +36,13 @@
                 android:backgroundTint="@color/white"
                 android:src="@drawable/ic_delete"
                 android:layout_marginEnd="3dp"
-                android:layout_alignParentEnd="true"/>
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/trash_can_description"/>
 
         </RelativeLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/headline"
             android:id="@+id/recycle_view"
             android:background="@color/background_gray"
             android:layout_weight="8">
@@ -54,7 +54,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/page_buttom"
+        android:id="@+id/page_bottom"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:orientation="horizontal"
@@ -71,7 +71,8 @@
             android:backgroundTint="@color/blue"
             android:tint="@color/white"
             android:src="@drawable/ic_add"
-            app:elevation="30dp"/>
+            app:elevation="30dp"
+            android:contentDescription="@string/add_item"/>
 
     </LinearLayout>
 </RelativeLayout>

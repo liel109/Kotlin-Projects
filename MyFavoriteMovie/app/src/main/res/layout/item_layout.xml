@@ -20,7 +20,8 @@
                 android:layout_height="150dp"
                 android:cropToPadding="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/background"/>
+                android:src="@drawable/background"
+                android:contentDescription="@string/movie_poster"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -50,7 +51,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/movie_time"
-                android:text="1H 20m"
+                android:text=""
                 android:layout_weight="5"/>
 
         </LinearLayout>
@@ -70,18 +71,18 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="★★★★★"
+                android:text=""
                 android:textColor="@color/gold"
                 android:id="@+id/stars"
-                android:layout_weight="4"/>
+                android:layout_weight="5"/>
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:src="@drawable/ic_fav"
-                android:layout_weight="1"
-                android:id="@+id/heart"/>
+<!--            <ImageView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="end"-->
+<!--                android:src="@drawable/ic_fav"-->
+<!--                android:layout_weight="1"-->
+<!--                android:id="@+id/heart"/>-->
 
         </LinearLayout>
 

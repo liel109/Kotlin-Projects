@@ -22,13 +22,13 @@ class ItemAdapter(val items: List<Item>, private val callback: ItemListener) : R
             binding.root.setOnClickListener(this)
             binding.root.setOnLongClickListener(this)
         }
+
         fun bind(item: Item){
             binding.movieTitle.text = item.title
-            binding.movieTime.text = item.length
+            binding.movieTime.text = item.length.toString() + "m"
             Glide.with(binding.root).load(item.photo).into(binding.moviePoster)
             binding.stars.text = "★".repeat(item.stars)
         }
-
 
         override fun onClick(p0: View?) {
             callback.onItemClicked(adapterPosition)

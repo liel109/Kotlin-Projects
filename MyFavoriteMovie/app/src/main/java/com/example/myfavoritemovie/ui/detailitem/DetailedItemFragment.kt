@@ -29,7 +29,7 @@ class DetailedItemFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.chosenItem.observe(viewLifecycleOwner) {
             binding.itemTitle.text = it.title
-            binding.itemDesc.text = it.length
+            binding.itemDesc.text = it.length.toString()
             Glide.with(requireContext()).load(it.photo).circleCrop()
                 .into(binding.itemImage)
         }

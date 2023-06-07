@@ -8,8 +8,10 @@ import androidx.room.PrimaryKey
 data class Item(
     @ColumnInfo(name = "title")
     val title: String,
+    @ColumnInfo(name = "description")
+    val description : String,
     @ColumnInfo(name = "movie length")
-    val length: String,
+    val length: Int,
     @ColumnInfo(name = "photo URL")
     val photo: String?,
     @ColumnInfo(name = "number of stars")

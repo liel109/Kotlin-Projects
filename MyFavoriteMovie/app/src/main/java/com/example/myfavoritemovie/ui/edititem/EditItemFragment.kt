@@ -1,4 +1,4 @@
-package com.example.myfavoritemovie.ui.additem
+package com.example.myfavoritemovie.ui.edititem
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
@@ -9,70 +9,82 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.myfavoritemovie.R
-import com.example.myfavoritemovie.data.model.Item
-import com.example.myfavoritemovie.ui.ItemViewModel
 import com.example.myfavoritemovie.data.utils.autoCleared
-import com.example.myfavoritemovie.databinding.AddItemPageFragmentBinding
+import com.example.myfavoritemovie.databinding.EditItemFragmentBinding
+import com.example.myfavoritemovie.ui.ItemViewModel
 
-class AddItemFragment : Fragment() {
-
+class EditItemFragment : Fragment() {
     private val ANIMATION_DURATION = 75L
-
-    private var binding : AddItemPageFragmentBinding by autoCleared()
-
-    private var imageUri : Uri? = null
-
+    private var binding: EditItemFragmentBinding by autoCleared()
+    private val viewModel : ItemViewModel by activityViewModels()
+    private var imageUri : String? = null
     private var numberOfStars : Int = 0
 
-    private val viewModel : ItemViewModel by activityViewModels()
 
     private val pickItemLauncher : ActivityResultLauncher<Array<String>> =
-    registerForActivityResult(ActivityResultContracts.OpenDocument()){
-        uri: Uri? ->
-        if(uri != null){
-            binding.pickImage.setImageURI(uri)
-            requireActivity().contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            imageUri = uri
+        registerForActivityResult(ActivityResultContracts.OpenDocument()){
+                uri: Uri? ->
+            if(uri != null){
+                binding.pickImage.setImageURI(uri)
+                requireActivity().contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                imageUri = uri.toString()
+            }
         }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        binding = AddItemPageFragmentBinding.inflate(inflater, container, false)
+        binding = EditItemFragmentBinding.inflate(layoutInflater,container,false)
 
         binding.movieLengthHours.minValue = 0
         binding.movieLengthHours.maxValue = 20
         binding.movieLengthMinutes.minValue = 0
         binding.movieLengthMinutes.maxValue = 60
 
-        binding.addButton.setOnClickListener {
-            if(!validateInput()){
-                Toast.makeText(requireContext(),"Enter all needed information", Toast.LENGTH_LONG).show()
-            }
-            else {
-                val item = Item(
-                    binding.movieTitle.text.toString(),
-                    binding.movieDesc.text.toString(),
-                    binding.movieLengthHours.value * 60 + binding.movieLengthMinutes.value,
-                    imageUri.toString(),
-                    numberOfStars
-                )
-                viewModel.addItem(item)
+        return binding.root
+    }
 
-                findNavController().navigate(R.id.action_addItemFragment_to_mainPageFragment)
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        viewModel.chosenItem.observe(viewLifecycleOwner) {
+            imageUri = it.photo
+            binding.movieTitle.setText(it.title)
+            binding.movieDesc.setText(it.description)
+            binding.movieLengthMinutes.value = it.length%60
+            binding.movieLengthHours.value = it.length/60
+            initiateStars(it.stars)
+            Glide.with(requireContext()).load(it.photo).circleCrop()
+                .into(binding.pickImage)
         }
+
+        binding.changeButton.setOnClickListener {
+            viewModel.chosenItem.observe(viewLifecycleOwner){
+                it.title = binding.movieTitle.text.toString()
+                it.length = binding.movieLengthHours.value * 60 + binding.movieLengthMinutes.value
+                it.stars = numberOfStars
+                it.photo = imageUri
+                viewModel.updateItem(it)
+            }
+            findNavController().navigate(R.id.action_editItemFragment_to_mainPageFragment)
+        }
+
+
+        binding.changeImageButton.setOnClickListener {
+            pickItemLauncher.launch(arrayOf("image/*"))
+        }
+
+
+
+
 
         binding.firstStar.setOnClickListener {
             changeStar(binding.firstStar, true)
@@ -119,14 +131,25 @@ class AddItemFragment : Fragment() {
             numberOfStars = 5
         }
 
-        binding.pickImageButton.setOnClickListener {
-            pickItemLauncher.launch(arrayOf("image/*"))
-        }
 
-        return binding.root
+        super.onViewCreated(view, savedInstanceState)
     }
 
-
+    private fun initiateStars(numberOfStars: Int){
+        binding.firstStar.setImageResource(R.drawable.ic_full_star)
+        if(numberOfStars > 1){
+            binding.secondStar.setImageResource(R.drawable.ic_full_star)
+        }
+        if(numberOfStars > 2){
+            binding.thirdStar.setImageResource(R.drawable.ic_full_star)
+        }
+        if(numberOfStars > 3){
+            binding.fourthStar.setImageResource(R.drawable.ic_full_star)
+        }
+        if(numberOfStars > 4){
+            binding.fifthStar.setImageResource(R.drawable.ic_full_star)
+        }
+    }
 
     private fun changeStar(star: ImageView, full : Boolean){
         if(full){
@@ -148,11 +171,6 @@ class AddItemFragment : Fragment() {
             star.setImageResource(R.drawable.ic_empty_star)
         }
     }
-
-    private fun validateInput(): Boolean {
-        return !(numberOfStars == 0 || binding.movieTitle.text.toString().trim().isEmpty()
-                || binding.movieDesc.text.toString().trim().isEmpty()
-                || (binding.movieLengthMinutes.value ==0 && binding.movieLengthHours.value == 0))
-    }
-
 }
+
+

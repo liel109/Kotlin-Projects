@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.get
@@ -16,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myfavoritemovie.R
 import com.example.myfavoritemovie.ui.ItemViewModel
 import com.example.myfavoritemovie.data.utils.autoCleared
@@ -60,8 +62,8 @@ class MainPageFragment : Fragment() {
                         dialogView.findViewById<TextView>(R.id.item_length).text = "${it.length} ${R.string.length_minutes}"
                         dialogView.findViewById<TextView>(R.id.item_desc).text = it.description
                         dialogView.findViewById<TextView>(R.id.item_rating).text = "★".repeat(it.stars)
-                        //Glide.with(requireContext()).load(it.photo).circleCrop()
-                         //   .into(dialogView.findViewById<ImageView>(R.id.item_image))
+                        Glide.with(requireContext()).load(it.photo)
+                            .into(dialogView.findViewById<ImageView>(R.id.item_image))
                     }
                     dialogBuilder.setView(dialogView)
                     val alertDialog = dialogBuilder.create()
@@ -93,7 +95,8 @@ class MainPageFragment : Fragment() {
                 }
 
                 override fun onItemLongClicked(index: Int) {
-                    Toast.makeText(requireContext(),"edit",Toast.LENGTH_LONG).show()
+                    viewModel.setItem((binding.recycleView.adapter as ItemAdapter).itemAt(index))
+                    findNavController().navigate(R.id.action_mainPageFragment_to_editItemFragment)
                 }
             })
         }

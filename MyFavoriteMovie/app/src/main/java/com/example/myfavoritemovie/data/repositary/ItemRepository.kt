@@ -36,6 +36,10 @@ class ItemRepository(application: Application) {
         itemDao?.deleteAll()
     }
 
+    suspend fun updateItem(item: Item){
+        itemDao?.updateItem(item)
+    }
+
 //    fun deleteAll(){
 //        itemDao?.deleteAll()
 //    }

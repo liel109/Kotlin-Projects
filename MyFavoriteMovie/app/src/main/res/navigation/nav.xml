@@ -18,12 +18,8 @@
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
         <action
-            android:id="@+id/action_mainPageFragment_to_detailedItemFragment"
-            app:destination="@id/detailedItemFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
+            android:id="@+id/action_mainPageFragment_to_editItemFragment"
+            app:destination="@id/editItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/addItemFragment"
@@ -40,8 +36,12 @@
             app:popUpTo="@id/nav" />
     </fragment>
     <fragment
-        android:id="@+id/detailedItemFragment"
-        android:name="com.example.myfavoritemovie.ui.detailitem.DetailedItemFragment"
-        android:label="detail_item_layout"
-        tools:layout="@layout/detail_item_layout" />
+        android:id="@+id/editItemFragment"
+        android:name="com.example.myfavoritemovie.ui.edititem.EditItemFragment"
+        android:label="edit_item_fragment"
+        tools:layout="@layout/edit_item_fragment" >
+        <action
+            android:id="@+id/action_editItemFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
+    </fragment>
 </navigation>

@@ -29,9 +29,7 @@ class ItemViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-//    fun addItem(item: Item){
-//        repository.addItem(item)
-//    }
+
 
     fun deleteItem(item: Item){
         viewModelScope.launch {
@@ -39,9 +37,7 @@ class ItemViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-//    fun deleteItem(item: Item){
-//        repository.deleteItem(item)
-//    }
+
 
     fun deleteAllItems(){
         viewModelScope.launch {
@@ -49,9 +45,13 @@ class ItemViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-//    fun deleteAllItems(){
-//        repository.deleteAll()
-//    }
+    fun updateItem(item: Item){
+        viewModelScope.launch {
+            repository.updateItem(item)
+        }
+    }
+
+
 
 
 }

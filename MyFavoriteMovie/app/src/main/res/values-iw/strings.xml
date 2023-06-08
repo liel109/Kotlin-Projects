@@ -24,4 +24,8 @@
     <string name="movie_length_example">123ד</string>
     <string name="movie_description_example">תקציר לסרט שנמשך לאורך כמה שורות</string>
     <string name="movie_description_detail_layout">תקציר:</string>
+    <string name="change_image">שנה תמונה</string>
+    <string name="change_item">עדכן</string>
+    <string name="edit_movie">עריכת סרט:</string>
+    <string name="invalid_input_message">אנא מלא את כל השדות הדרושים</string>
 </resources>

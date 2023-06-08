@@ -23,4 +23,8 @@
     <string name="movie_length_example">123m</string>
     <string name="movie_description_example">this is some content description about the movie that even spans among several lines</string>
     <string name="movie_description_detail_layout">Description</string>
+    <string name="change_image">Change Image</string>
+    <string name="change_item">Change</string>
+    <string name="edit_movie">Edit Movie</string>
+    <string name="invalid_input_message">Please Enter All Required Fields</string>
 </resources>

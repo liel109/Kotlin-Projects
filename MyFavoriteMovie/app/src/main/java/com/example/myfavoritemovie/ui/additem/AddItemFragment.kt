@@ -1,25 +1,26 @@
 package com.example.myfavoritemovie.ui.additem
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.myfavoritemovie.R
 import com.example.myfavoritemovie.data.model.Item
 import com.example.myfavoritemovie.ui.ItemViewModel
 import com.example.myfavoritemovie.data.utils.autoCleared
 import com.example.myfavoritemovie.databinding.AddItemPageFragmentBinding
+import com.example.myfavoritemovie.ui.ItemUtils
 
 class AddItemFragment : Fragment() {
 
@@ -37,7 +38,8 @@ class AddItemFragment : Fragment() {
     registerForActivityResult(ActivityResultContracts.OpenDocument()){
         uri: Uri? ->
         if(uri != null){
-            binding.pickImage.setImageURI(uri)
+            Glide.with(requireContext()).load(uri).circleCrop()
+                .into(binding.pickImage)
             requireActivity().contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
             imageUri = uri
         }
@@ -56,9 +58,13 @@ class AddItemFragment : Fragment() {
         binding.movieLengthMinutes.minValue = 0
         binding.movieLengthMinutes.maxValue = 60
 
+        Glide.with(requireContext()).load(ContextCompat.getDrawable(requireContext(),R.drawable.movie_picture_place_holder)).circleCrop()
+            .into(binding.pickImage)
+
         binding.addButton.setOnClickListener {
-            if(!validateInput()){
-                Toast.makeText(requireContext(),"Enter all needed information", Toast.LENGTH_LONG).show()
+            if(!ItemUtils.validateInput(numberOfStars, binding.movieTitle.toString(), binding.movieDesc.toString(),
+                binding.movieLengthMinutes.value, binding.movieLengthHours.value, imageUri)){
+                Toast.makeText(requireContext(),getString(R.string.invalid_input_message), Toast.LENGTH_LONG).show()
             }
             else {
                 val item = Item(
@@ -75,47 +81,47 @@ class AddItemFragment : Fragment() {
         }
 
         binding.firstStar.setOnClickListener {
-            changeStar(binding.firstStar, true)
-            changeStar(binding.secondStar, false)
-            changeStar(binding.thirdStar, false)
-            changeStar(binding.fourthStar, false)
-            changeStar(binding.fifthStar, false)
+            ItemUtils.changeStar(binding.firstStar, true)
+            ItemUtils.changeStar(binding.secondStar, false)
+            ItemUtils.changeStar(binding.thirdStar, false)
+            ItemUtils.changeStar(binding.fourthStar, false)
+            ItemUtils.changeStar(binding.fifthStar, false)
             numberOfStars = 1
         }
 
         binding.secondStar.setOnClickListener {
-            changeStar(binding.firstStar, true)
-            changeStar(binding.secondStar, true)
-            changeStar(binding.thirdStar, false)
-            changeStar(binding.fourthStar, false)
-            changeStar(binding.fifthStar, false)
+            ItemUtils.changeStar(binding.firstStar, true)
+            ItemUtils.changeStar(binding.secondStar, true)
+            ItemUtils.changeStar(binding.thirdStar, false)
+            ItemUtils.changeStar(binding.fourthStar, false)
+            ItemUtils.changeStar(binding.fifthStar, false)
             numberOfStars = 2
         }
 
         binding.thirdStar.setOnClickListener {
-            changeStar(binding.firstStar, true)
-            changeStar(binding.secondStar, true)
-            changeStar(binding.thirdStar, true)
-            changeStar(binding.fourthStar, false)
-            changeStar(binding.fifthStar, false)
+            ItemUtils.changeStar(binding.firstStar, true)
+            ItemUtils.changeStar(binding.secondStar, true)
+            ItemUtils.changeStar(binding.thirdStar, true)
+            ItemUtils.changeStar(binding.fourthStar, false)
+            ItemUtils.changeStar(binding.fifthStar, false)
             numberOfStars = 3
         }
 
         binding.fourthStar.setOnClickListener {
-            changeStar(binding.firstStar, true)
-            changeStar(binding.secondStar, true)
-            changeStar(binding.thirdStar, true)
-            changeStar(binding.fourthStar, true)
-            changeStar(binding.fifthStar, false)
+            ItemUtils.changeStar(binding.firstStar, true)
+            ItemUtils.changeStar(binding.secondStar, true)
+            ItemUtils.changeStar(binding.thirdStar, true)
+            ItemUtils.changeStar(binding.fourthStar, true)
+            ItemUtils.changeStar(binding.fifthStar, false)
             numberOfStars = 4
         }
 
         binding.fifthStar.setOnClickListener {
-            changeStar(binding.firstStar, true)
-            changeStar(binding.secondStar, true)
-            changeStar(binding.thirdStar, true)
-            changeStar(binding.fourthStar, true)
-            changeStar(binding.fifthStar, true)
+            ItemUtils.changeStar(binding.firstStar, true)
+            ItemUtils.changeStar(binding.secondStar, true)
+            ItemUtils.changeStar(binding.thirdStar, true)
+            ItemUtils.changeStar(binding.fourthStar, true)
+            ItemUtils.changeStar(binding.fifthStar, true)
             numberOfStars = 5
         }
 
@@ -125,34 +131,4 @@ class AddItemFragment : Fragment() {
 
         return binding.root
     }
-
-
-
-    private fun changeStar(star: ImageView, full : Boolean){
-        if(full){
-            star.setImageResource(R.drawable.ic_full_star)
-
-            val scaleX = ObjectAnimator.ofFloat(star,"scaleX",1f, 1.2f).setDuration(ANIMATION_DURATION)
-            val scaleY = ObjectAnimator.ofFloat(star,"scaleY",1f,1.2f).setDuration(ANIMATION_DURATION)
-            scaleX.repeatCount = 1
-            scaleX.repeatMode = ObjectAnimator.REVERSE
-            scaleY.repeatCount = 1
-            scaleY.repeatMode = ObjectAnimator.REVERSE
-
-            val animatorSet = AnimatorSet()
-            animatorSet.playTogether(scaleX,scaleY)
-            animatorSet.start()
-
-        }
-        else{
-            star.setImageResource(R.drawable.ic_empty_star)
-        }
-    }
-
-    private fun validateInput(): Boolean {
-        return !(numberOfStars == 0 || binding.movieTitle.text.toString().trim().isEmpty()
-                || binding.movieDesc.text.toString().trim().isEmpty()
-                || (binding.movieLengthMinutes.value ==0 && binding.movieLengthHours.value == 0))
-    }
-
 }

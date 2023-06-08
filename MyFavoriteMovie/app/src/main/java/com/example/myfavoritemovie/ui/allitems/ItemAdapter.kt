@@ -1,14 +1,18 @@
 package com.example.myfavoritemovie.ui.allitems
 
+import android.content.Context
+import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.TypedArrayUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.myfavoritemovie.R
 import com.example.myfavoritemovie.data.model.Item
 import com.example.myfavoritemovie.databinding.ItemLayoutBinding
 
-class ItemAdapter(val items: List<Item>, private val callback: ItemListener) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+class ItemAdapter(val items: List<Item>, private val callback: ItemListener, private val context: Context) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     interface ItemListener{
         fun onItemClicked(index:Int)
@@ -25,7 +29,7 @@ class ItemAdapter(val items: List<Item>, private val callback: ItemListener) : R
 
         fun bind(item: Item){
             binding.movieTitle.text = item.title
-            binding.movieTime.text = item.length.toString() + "m"
+            binding.movieTime.text = "${item.length.toString()}${context.getString(R.string.length_minutes)}"
             Glide.with(binding.root).load(item.photo).into(binding.moviePoster)
             binding.stars.text = "★".repeat(item.stars)
         }

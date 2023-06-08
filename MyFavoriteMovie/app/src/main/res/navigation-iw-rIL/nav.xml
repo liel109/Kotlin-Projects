@@ -3,45 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/mainPageFragment2">
+    app:startDestination="@id/mainPageFragment">
 
     <fragment
-        android:id="@+id/mainPageFragment2"
+        android:id="@+id/mainPageFragment"
         android:name="com.example.myfavoritemovie.ui.allitems.MainPageFragment"
         android:label="main_page_fragment"
         tools:layout="@layout/main_page_fragment" >
         <action
-            android:id="@+id/action_mainPageFragment2_to_addItemFragment2"
-            app:destination="@id/addItemFragment2"
+            android:id="@+id/action_mainPageFragment_to_addItemFragment"
+            app:destination="@id/addItemFragment"
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
         <action
-            android:id="@+id/action_mainPageFragment2_to_editItemFragment2"
-            app:destination="@id/editItemFragment2" />
+            android:id="@+id/action_mainPageFragment_to_editItemFragment"
+            app:destination="@id/editItemFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
-        android:id="@+id/addItemFragment2"
+        android:id="@+id/addItemFragment"
         android:name="com.example.myfavoritemovie.ui.additem.AddItemFragment"
         android:label="add_item_page_fragment"
         tools:layout="@layout/add_item_page_fragment" >
         <action
-            android:id="@+id/action_addItemFragment2_to_mainPageFragment2"
-            app:destination="@id/mainPageFragment2"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left"
+            android:id="@+id/action_addItemFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
             app:popUpTo="@id/nav" />
     </fragment>
     <fragment
-        android:id="@+id/editItemFragment2"
+        android:id="@+id/editItemFragment"
         android:name="com.example.myfavoritemovie.ui.edititem.EditItemFragment"
         android:label="edit_item_fragment"
         tools:layout="@layout/edit_item_fragment" >
         <action
-            android:id="@+id/action_editItemFragment2_to_mainPageFragment2"
-            app:destination="@id/mainPageFragment2" />
+            android:id="@+id/action_editItemFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            app:popUpTo="@id/nav" />
     </fragment>
 </navigation>

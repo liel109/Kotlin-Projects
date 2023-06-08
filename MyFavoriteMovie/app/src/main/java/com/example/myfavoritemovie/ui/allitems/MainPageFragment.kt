@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -59,7 +58,7 @@ class MainPageFragment : Fragment() {
 
                     viewModel.chosenItem.observe(viewLifecycleOwner) {
                         dialogView.findViewById<TextView>(R.id.item_title).text = it.title
-                        dialogView.findViewById<TextView>(R.id.item_length).text = "${it.length} ${R.string.length_minutes}"
+                        dialogView.findViewById<TextView>(R.id.item_length).text = "${it.length}${getString(R.string.length_minutes)}"
                         dialogView.findViewById<TextView>(R.id.item_desc).text = it.description
                         dialogView.findViewById<TextView>(R.id.item_rating).text = "★".repeat(it.stars)
                         Glide.with(requireContext()).load(it.photo)
@@ -98,7 +97,7 @@ class MainPageFragment : Fragment() {
                     viewModel.setItem((binding.recycleView.adapter as ItemAdapter).itemAt(index))
                     findNavController().navigate(R.id.action_mainPageFragment_to_editItemFragment)
                 }
-            })
+            }, requireContext())
         }
 
         binding.clearButton.setOnClickListener {

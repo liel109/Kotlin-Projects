@@ -20,17 +20,9 @@ class ItemRepository(application: Application) {
         itemDao?.addItem(item)
     }
 
-//    fun addItem(item: Item){
-//        itemDao?.addItem(item)
-//    }
-
     suspend fun deleteItem(item: Item){
         itemDao?.deleteItem(item)
     }
-
-//    fun deleteItem(item: Item){
-//        itemDao?.deleteItem(item)
-//    }
 
     suspend fun deleteAll(){
         itemDao?.deleteAll()
@@ -39,8 +31,4 @@ class ItemRepository(application: Application) {
     suspend fun updateItem(item: Item){
         itemDao?.updateItem(item)
     }
-
-//    fun deleteAll(){
-//        itemDao?.deleteAll()
-//    }
 }

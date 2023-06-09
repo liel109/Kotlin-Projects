@@ -24,16 +24,12 @@ import com.example.myfavoritemovie.ui.ItemUtils
 
 class AddItemFragment : Fragment() {
 
-    private val ANIMATION_DURATION = 75L
-
     private var binding : AddItemPageFragmentBinding by autoCleared()
-
     private var imageUri : Uri? = null
-
     private var numberOfStars : Int = 0
-
     private val viewModel : ItemViewModel by activityViewModels()
 
+    //let the user pick an image from the phone files
     private val pickItemLauncher : ActivityResultLauncher<Array<String>> =
     registerForActivityResult(ActivityResultContracts.OpenDocument()){
         uri: Uri? ->
@@ -53,14 +49,17 @@ class AddItemFragment : Fragment() {
 
         binding = AddItemPageFragmentBinding.inflate(inflater, container, false)
 
+        //set minimum and maximum for the movie length picker
         binding.movieLengthHours.minValue = 0
         binding.movieLengthHours.maxValue = 20
         binding.movieLengthMinutes.minValue = 0
         binding.movieLengthMinutes.maxValue = 60
 
+        //place the default image
         Glide.with(requireContext()).load(ContextCompat.getDrawable(requireContext(),R.drawable.movie_picture_place_holder)).circleCrop()
             .into(binding.pickImage)
 
+        //create and add an item to the view model if the user provided the needed inputs
         binding.addButton.setOnClickListener {
             if(!ItemUtils.validateInput(numberOfStars, binding.movieTitle.toString(), binding.movieDesc.toString(),
                 binding.movieLengthMinutes.value, binding.movieLengthHours.value, imageUri)){
@@ -80,6 +79,7 @@ class AddItemFragment : Fragment() {
             }
         }
 
+        //if the first star is clicked, make him full
         binding.firstStar.setOnClickListener {
             ItemUtils.changeStar(binding.firstStar, true)
             ItemUtils.changeStar(binding.secondStar, false)
@@ -89,6 +89,7 @@ class AddItemFragment : Fragment() {
             numberOfStars = 1
         }
 
+        //if the second star is clicked, make him and the 'smaller' stars full
         binding.secondStar.setOnClickListener {
             ItemUtils.changeStar(binding.firstStar, true)
             ItemUtils.changeStar(binding.secondStar, true)
@@ -98,6 +99,7 @@ class AddItemFragment : Fragment() {
             numberOfStars = 2
         }
 
+        //if the third star is clicked, make him and the 'smaller' stars full
         binding.thirdStar.setOnClickListener {
             ItemUtils.changeStar(binding.firstStar, true)
             ItemUtils.changeStar(binding.secondStar, true)
@@ -107,6 +109,7 @@ class AddItemFragment : Fragment() {
             numberOfStars = 3
         }
 
+        //if the forth star is clicked, make him and the 'smaller' stars full
         binding.fourthStar.setOnClickListener {
             ItemUtils.changeStar(binding.firstStar, true)
             ItemUtils.changeStar(binding.secondStar, true)
@@ -116,6 +119,7 @@ class AddItemFragment : Fragment() {
             numberOfStars = 4
         }
 
+        //if the fifth star is clicked, make him and the 'smaller' stars full
         binding.fifthStar.setOnClickListener {
             ItemUtils.changeStar(binding.firstStar, true)
             ItemUtils.changeStar(binding.secondStar, true)
@@ -125,6 +129,7 @@ class AddItemFragment : Fragment() {
             numberOfStars = 5
         }
 
+        //launch the pickItemLauncher to pick an image
         binding.pickImageButton.setOnClickListener {
             pickItemLauncher.launch(arrayOf("image/*"))
         }

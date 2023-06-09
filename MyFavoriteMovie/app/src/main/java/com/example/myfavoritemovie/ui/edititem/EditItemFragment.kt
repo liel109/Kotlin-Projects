@@ -20,13 +20,13 @@ import com.example.myfavoritemovie.ui.ItemViewModel
 import com.example.myfavoritemovie.ui.ItemUtils
 
 class EditItemFragment : Fragment() {
-    private val ANIMATION_DURATION = 75L
     private var binding: EditItemFragmentBinding by autoCleared()
     private val viewModel : ItemViewModel by activityViewModels()
     private var imageUri : Uri? = null
     private var numberOfStars : Int = 0
 
 
+    //let the user pick an image from the phone files
     private val pickItemLauncher : ActivityResultLauncher<Array<String>> =
         registerForActivityResult(ActivityResultContracts.OpenDocument()){
                 uri: Uri? ->
@@ -45,6 +45,7 @@ class EditItemFragment : Fragment() {
     ): View? {
         binding = EditItemFragmentBinding.inflate(layoutInflater,container,false)
 
+        //set minimum and maximum for the movie length picker
         binding.movieLengthHours.minValue = 0
         binding.movieLengthHours.maxValue = 20
         binding.movieLengthMinutes.minValue = 0
@@ -54,7 +55,7 @@ class EditItemFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        //get the item fields
         viewModel.chosenItem.observe(viewLifecycleOwner) {
             imageUri = Uri.parse(it.photo)
             binding.movieTitle.setText(it.title)
@@ -67,6 +68,7 @@ class EditItemFragment : Fragment() {
                 .into(binding.pickImage)
         }
 
+        //update the item
         binding.changeButton.setOnClickListener {
             viewModel.chosenItem.observe(viewLifecycleOwner){
                 if(!ItemUtils.validateInput(numberOfStars, binding.movieTitle.text.toString(), binding.movieDesc.text.toString(),
@@ -86,10 +88,12 @@ class EditItemFragment : Fragment() {
         }
 
 
+        //launch the pickItemLauncher to pick an image
         binding.changeImageButton.setOnClickListener {
             pickItemLauncher.launch(arrayOf("image/*"))
         }
 
+        //if the first star is clicked, make him full
         binding.firstStar.setOnClickListener {
             ItemUtils.changeStar(binding.firstStar, true)
             ItemUtils.changeStar(binding.secondStar, false)
@@ -99,6 +103,7 @@ class EditItemFragment : Fragment() {
             numberOfStars = 1
         }
 
+        //if the second star is clicked, make him and the 'smaller' stars full
         binding.secondStar.setOnClickListener {
             ItemUtils.changeStar(binding.firstStar, true)
             ItemUtils.changeStar(binding.secondStar, true)
@@ -108,6 +113,7 @@ class EditItemFragment : Fragment() {
             numberOfStars = 2
         }
 
+        //if the third star is clicked, make him and the 'smaller' stars full
         binding.thirdStar.setOnClickListener {
             ItemUtils.changeStar(binding.firstStar, true)
             ItemUtils.changeStar(binding.secondStar, true)
@@ -117,6 +123,7 @@ class EditItemFragment : Fragment() {
             numberOfStars = 3
         }
 
+        //if the forth star is clicked, make him and the 'smaller' stars full
         binding.fourthStar.setOnClickListener {
             ItemUtils.changeStar(binding.firstStar, true)
             ItemUtils.changeStar(binding.secondStar, true)
@@ -126,6 +133,7 @@ class EditItemFragment : Fragment() {
             numberOfStars = 4
         }
 
+        //if the fifth star is clicked, make him and the 'smaller' stars full
         binding.fifthStar.setOnClickListener {
             ItemUtils.changeStar(binding.firstStar, true)
             ItemUtils.changeStar(binding.secondStar, true)
@@ -139,6 +147,7 @@ class EditItemFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    //initiate the stars to match the items rating
     private fun initiateStars(numberOfStars: Int){
         binding.firstStar.setImageResource(R.drawable.ic_full_star)
         if(numberOfStars > 1){

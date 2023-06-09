@@ -25,7 +25,6 @@ import com.example.myfavoritemovie.databinding.MainPageFragmentBinding
 class MainPageFragment : Fragment() {
 
     private var binding: MainPageFragmentBinding by autoCleared()
-
     private val viewModel : ItemViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -50,7 +49,6 @@ class MainPageFragment : Fragment() {
             binding.recycleView.adapter = ItemAdapter(it, object : ItemAdapter.ItemListener {
                 override fun onItemClicked(index: Int) {
                     viewModel.setItem((binding.recycleView.adapter as ItemAdapter).itemAt(index))
-                    //findNavController().navigate(R.id.action_mainPageFragment_to_detailedItemFragment)
                     val dialogBuilder = AlertDialog.Builder(context)
                     val dialogView : View = layoutInflater.inflate(R.layout.detail_item_layout, null)
 
@@ -100,6 +98,7 @@ class MainPageFragment : Fragment() {
             }, requireContext())
         }
 
+        //Delete all items confirmation dialog
         binding.clearButton.setOnClickListener {
             val builder = AlertDialog.Builder(context)
             builder.setTitle(getString(R.string.confirmation))
@@ -121,6 +120,7 @@ class MainPageFragment : Fragment() {
 
         ItemTouchHelper(object : ItemTouchHelper.Callback(){
 
+            //let the user swipe an item left out of the screen
             override fun getMovementFlags(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder
@@ -134,6 +134,7 @@ class MainPageFragment : Fragment() {
                 TODO("Not yet implemented")
             }
 
+            //when swiping the item left out of the screen deletes him
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 viewModel.deleteItem((binding.recycleView.adapter as ItemAdapter)
                     .itemAt(viewHolder.adapterPosition))

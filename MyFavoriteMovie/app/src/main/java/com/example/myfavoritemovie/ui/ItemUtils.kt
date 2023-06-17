@@ -8,8 +8,9 @@ import com.example.myfavoritemovie.R
 
 class ItemUtils {
     companion object {
-        private val ANIMATION_DURATION = 75L
+        private const val ANIMATION_DURATION = 75L
 
+        //Change a star from full star to empty star or the opposite with animation
         fun changeStar(star: ImageView, full: Boolean) {
             if (full) {
                 star.setImageResource(R.drawable.ic_full_star)
@@ -32,6 +33,7 @@ class ItemUtils {
             }
         }
 
+        //validate that the user entered all the needed input
         fun validateInput(
             numberOfStars: Int,
             movieTitle: String,

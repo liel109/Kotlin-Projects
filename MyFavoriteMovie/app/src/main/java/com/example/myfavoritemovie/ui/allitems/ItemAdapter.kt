@@ -1,18 +1,16 @@
 package com.example.myfavoritemovie.ui.allitems
 
 import android.content.Context
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.TypedArrayUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myfavoritemovie.R
 import com.example.myfavoritemovie.data.model.Item
 import com.example.myfavoritemovie.databinding.ItemLayoutBinding
 
-class ItemAdapter(val items: List<Item>, private val callback: ItemListener, private val context: Context) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+class ItemAdapter(private val items: List<Item>, private val callback: ItemListener, private val context: Context) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     interface ItemListener{
         fun onItemClicked(index:Int)
@@ -29,7 +27,7 @@ class ItemAdapter(val items: List<Item>, private val callback: ItemListener, pri
 
         fun bind(item: Item){
             binding.movieTitle.text = item.title
-            binding.movieTime.text = "${item.length.toString()}${context.getString(R.string.length_minutes)}"
+            binding.movieTime.text = "${item.length}${context.getString(R.string.length_minutes)}"
             Glide.with(binding.root).load(item.photo).into(binding.moviePoster)
             binding.stars.text = "${context.getString(R.string.star)}".repeat(item.stars)
         }
@@ -50,7 +48,6 @@ class ItemAdapter(val items: List<Item>, private val callback: ItemListener, pri
         ItemViewHolder(ItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false))
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) = holder.bind(items[position])
-
 
     override fun getItemCount() = items.size
 }

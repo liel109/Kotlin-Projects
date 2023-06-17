@@ -13,7 +13,7 @@ data class Item(
     @ColumnInfo(name = "movie length")
     var length: Int,
     @ColumnInfo(name = "photo URL")
-    var photo: String?,
+    var photo: String,
     @ColumnInfo(name = "number of stars")
     var stars: Int)
 {

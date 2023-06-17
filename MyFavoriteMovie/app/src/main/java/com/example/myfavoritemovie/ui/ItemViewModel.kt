@@ -12,11 +12,8 @@ import kotlinx.coroutines.launch
 class ItemViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = ItemRepository(application)
-
     val items : LiveData<List<Item>>? = repository.getItems()
-
     private val _chosenItem = MutableLiveData<Item>()
-
     val chosenItem : LiveData<Item> get() = _chosenItem
 
     fun setItem(item: Item){
@@ -29,15 +26,11 @@ class ItemViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-
-
     fun deleteItem(item: Item){
         viewModelScope.launch {
             repository.deleteItem(item)
         }
     }
-
-
 
     fun deleteAllItems(){
         viewModelScope.launch {
@@ -50,8 +43,5 @@ class ItemViewModel(application: Application) : AndroidViewModel(application) {
             repository.updateItem(item)
         }
     }
-
-
-
 
 }

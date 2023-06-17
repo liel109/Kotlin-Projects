@@ -27,4 +27,5 @@
     <string name="change_item">Change</string>
     <string name="edit_movie">Edit Movie</string>
     <string name="invalid_input_message">Please Enter All Required Fields</string>
+    <string name="star">★</string>
 </resources>

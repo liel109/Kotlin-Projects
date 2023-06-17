@@ -20,7 +20,7 @@ import com.example.myfavoritemovie.ui.ItemViewModel
 import com.example.myfavoritemovie.ui.ItemUtils
 
 class EditItemFragment : Fragment() {
-    private val ANIMATION_DURATION = 75L
+
     private var binding: EditItemFragmentBinding by autoCleared()
     private val viewModel : ItemViewModel by activityViewModels()
     private var imageUri : Uri? = null
@@ -75,7 +75,7 @@ class EditItemFragment : Fragment() {
                 }
                 else {
                     it.title = binding.movieTitle.text.toString()
-                    it.description = binding.movieTitle.text.toString()
+                    it.description = binding.movieDesc.text.toString()
                     it.length = binding.movieLengthHours.value * 60 + binding.movieLengthMinutes.value
                     it.stars = numberOfStars
                     it.photo = imageUri.toString()

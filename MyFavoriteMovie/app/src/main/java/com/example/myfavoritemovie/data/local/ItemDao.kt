@@ -24,9 +24,6 @@ interface ItemDao {
     @Query("SELECT * FROM `table`")
     fun getItems() : LiveData<List<Item>>
 
-    @Query("SELECT * FROM `table` WHERE title LIKE :title")
-    suspend fun getItem(title: String) : Item
-
     @Query("DELETE FROM `table`")
     suspend fun deleteAll()
 }

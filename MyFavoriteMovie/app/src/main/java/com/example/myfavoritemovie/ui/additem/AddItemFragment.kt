@@ -24,8 +24,6 @@ import com.example.myfavoritemovie.ui.ItemUtils
 
 class AddItemFragment : Fragment() {
 
-    private val ANIMATION_DURATION = 75L
-
     private var binding : AddItemPageFragmentBinding by autoCleared()
 
     private var imageUri : Uri? = null

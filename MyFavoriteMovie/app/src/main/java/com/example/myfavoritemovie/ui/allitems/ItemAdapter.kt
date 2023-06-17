@@ -31,7 +31,7 @@ class ItemAdapter(val items: List<Item>, private val callback: ItemListener, pri
             binding.movieTitle.text = item.title
             binding.movieTime.text = "${item.length.toString()}${context.getString(R.string.length_minutes)}"
             Glide.with(binding.root).load(item.photo).into(binding.moviePoster)
-            binding.stars.text = "★".repeat(item.stars)
+            binding.stars.text = "${context.getString(R.string.star)}".repeat(item.stars)
         }
 
         override fun onClick(p0: View?) {
